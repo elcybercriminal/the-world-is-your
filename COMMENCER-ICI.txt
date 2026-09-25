@@ -1,0 +1,95 @@
+PRISME — APPLICATION ANDROID — VERSION 0.1.0
+Nom provisoire, modifiable.
+
+CE QUE TU AS REÇU
+Le projet complet React + Capacitor pour fabriquer une APK Android.
+Ce dossier n'est pas une APK et ne s'installe pas directement sur un téléphone.
+Aucun APK n'a pu être compilé ou testé dans l'environnement de création.
+Les sources, le backend SQL, les tests et la compilation GitHub sont inclus.
+
+POUR OBTENIR TON APK DE TEST DEPUIS GITHUB
+1. Crée un NOUVEAU dépôt GitHub vide, par exemple prisme-android.
+   Ne supprime aucun fichier de tes anciennes applications.
+2. Décompresse l'archive. Mets le CONTENU du dossier prisme à la racine du dépôt.
+   package.json, android, src, public, supabase et .github doivent être à la racine.
+   Le dossier .github est parfois masqué par les applications de fichiers.
+   Si tu ne peux pas le téléverser, crée le fichier
+   .github/workflows/android.yml dans GitHub et copie le contenu du fichier fourni.
+3. Ouvre l'onglet Actions. Le workflow « Construire Prisme APK » est fourni.
+   Il se lance sur un envoi dans la branche main, ou par Run workflow.
+4. Attends la fin. Ouvre le résultat puis Artifacts > Prisme-APK-test.
+5. Décompresse le fichier téléchargé et installe app-debug.apk sur Android.
+   Autorise l'installation depuis l'application de téléchargement si Android le demande.
+6. Pour commencer sans serveur, touche « Essayer la démonstration ».
+   Les exemples et tes modifications restent dans cet appareil ; personne d'autre
+   ne reçoit les messages de démonstration.
+
+Si l'exécution échoue, envoie le journal rouge d'Actions. La compilation Android
+n'ayant pas pu être exécutée ici, son succès sur GitHub reste à confirmer.
+La clé de signature de debug produite par GitHub n'est pas une clé de diffusion
+stable : pour distribuer des mises à jour, une signature de production sera nécessaire.
+Ne désinstalle pas une version contenant des données locales importantes sans sauvegarde.
+
+POUR DE VRAIS UTILISATEURS
+1. Crée un projet Supabase DÉDIÉ à cette nouvelle application.
+2. Dans SQL Editor, exécute une seule fois supabase/INSTALL.sql.
+   Ce script crée les tables et les règles ; ne l'exécute pas dans ton ancien projet.
+3. Dans Authentication > URL Configuration, ajoute la redirection :
+   fr.prisme.social://auth
+4. Vérifie les réglages de confirmation e-mail et configure l'envoi d'e-mails
+   pour les inscriptions et les liens de récupération. Teste les liens sur le téléphone.
+5. Récupère Project URL et la clé publique publishable (ou anon).
+   N'utilise jamais service_role, une clé secrète, ou un mot de passe de base de données.
+6. Pour une APK destinée aux autres utilisateurs : renseigne public/config.json
+   AVANT la compilation, puis relance le workflow. Tout le monde aura le même backend.
+   Pour un essai personnel, le bouton « Connecter mon service » dans l'application
+   permet de renseigner ces deux valeurs sur ton appareil.
+7. Crée deux comptes de test. Vérifie publication, suivi, message, réception,
+   photo privée, vocal et déconnexion avant d'inviter d'autres utilisateurs.
+
+UTILISATION
+- Accueil : fil, abonnements, likes, commentaires, favoris.
+- Explorer : publications chargées, recherche de légendes/hashtags, comptes,
+  classement récent ou populaire sur le lot chargé, bouton charger plus.
+- Profil : publications du compte, statistiques, modification, favoris privés.
+- Publier : sélection de 1 à 10 photos/vidéos, aperçu, suppression d'un média,
+  légende, progression du transfert. Limite de 50 Mo par fichier.
+- Lien / Embed : YouTube, Vimeo, Dailymotion, ou liens directs JPG/PNG/WebP/GIF/MP4/WebM.
+  Un lien par ligne. Les iframe et certains BBCodes sont interprétés en URLs sûres.
+  Aucun HTML arbitraire n'est exécuté. Certains lecteurs imposent leurs restrictions.
+- Photos : défilement horizontal dans un carrousel. Double toucher = J'aime.
+- Plein écran : bouton « Plein écran » sur le fil, ou toucher une case de grille.
+  Glisser vers le haut/bas change de publication ; gauche/droite change de photo.
+  Les flèches permettent aussi de naviguer. Pour une vidéo intégrée, glisser
+  sur le bord droit : l'intérieur de l'iframe appartient au lecteur externe.
+- Chat : chercher un compte avec le bouton ajouter, écrire, joindre une photo/vidéo,
+  prendre une photo, enregistrer puis écouter/annuler/envoyer un vocal, émojis.
+  Le micro fonctionne par toucher pour démarrer puis toucher pour terminer.
+  Les nouveaux messages sont recherchés toutes les 3 secondes quand le chat est visible.
+  La liste des chats est actualisée toutes les 4 secondes.
+- Une photo de chat s'ouvre en plein écran. Retour revient à la page précédente.
+- Paramètres : Clair, Sombre ou Automatique.
+
+ÉTAT HONNÊTE DE CETTE VERSION
+L'interface de chat s'inspire de tes captures : liste, caméra, composition et
+repères verticaux rose/bleu. Ce n'est pas l'application Snapchat ni son infrastructure.
+Les appels audio/vidéo sont indiqués comme indisponibles. Pas de Bitmoji, carte,
+My AI, Stories, notifications push quand l'application est fermée, transcription
+vocale, messages éphémères, ou détection de capture d'écran dans cette version.
+Les messages persistent. Ils ne sont pas chiffrés de bout en bout.
+Les appels backend, l'inscription et l'envoi entre deux téléphones nécessitent
+une validation avec le vrai projet Supabase. Aucun serveur utilisateur n'a été modifié.
+Le navigateur de test et la compilation Android locale ont été bloqués par
+l'environnement. Le rendu et les gestes tactiles restent à valider sur téléphone.
+La compilation web, les parcours d'interface en DOM simulé et les tests SQL passent.
+Ce n'est donc pas encore une version finale déclarée « parfaite » ou prête pour un store.
+
+CONTENU TECHNIQUE
+README.md : architecture, commandes, limites et exploitation.
+src/ : code de l'application.
+android/ : projet natif Android et wrapper Gradle.
+public/config.json : configuration publique du backend.
+supabase/INSTALL.sql : base de données et protection des accès.
+.github/workflows/android.yml : compilation automatique de l'APK de test.
+tests/ : tests d'interface, de liens et de confidentialité.
+VALIDATION.md : détail exact des vérifications réalisées.
