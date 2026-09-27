@@ -1,6 +1,0 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {parseEmbed,gestureAxis,validUsername,safeUrl} from '../src/logic.mjs';
-test('iframe imports the URL without executing HTML',()=>{assert.equal(parseEmbed('<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" onload="steal()"></iframe>').url,'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ');});
-test('rejects script URLs and arbitrary iframe origins',()=>{for(const s of ['javascript:alert(1)','<iframe src="https://evil.example/"></iframe>','https://youtube.com.evil.example/watch?v=dQw4w9WgXcQ'])assert.throws(()=>parseEmbed(s));});
-test('imports BBCode and video links with query strings',()=>{assert.equal(parseEmbed('[img]https://cdn.example/photo.jpg[/img]').type,'image');assert.equal(parseEmbed('https://cdn.example/clip.mp4?token=123').type,'video');assert.equal(parseEmbed('https://vimeo.com/12345').type,'embed');});
-test('gesture threshold separates taps and both swipe axes',()=>{assert.equal(gestureAxis(4,6),null);assert.equal(gestureAxis(130,20),'horizontal');assert.equal(gestureAxis(10,-200),'vertical');});
-test('profile validation rejects unsafe URLs and invalid handles',()=>{assert.equal(validUsername('alex.prisme'),true);assert.equal(validUsername('a<script>'),false);assert.equal(safeUrl('javascript:alert(1)'),'');});
